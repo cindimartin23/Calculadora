@@ -19,34 +19,34 @@ var Calculadora = {
 		Calculadora.maximizaTecla(event.target);
 	},
     minimizaTecla: function(boton){
-        var id = boton.id;
-        if( id=="1" || 
-            id=="2" || 
-            id=="3" || 
-            id=="0" || 
-            id=="igual" || 
-            id=="punto" ){
-            boton.style.width  = "21%;";
-            boton.style.height = "62px;";        
-        } else if( id == "mas" ){
-            boton.style.width  = "88%;";
-            boton.style.height = "98%;"
+        var idBoton = boton.id;
+        if( idBoton == "1" || 
+            idBoton == "2" || 
+            idBoton == "3" || 
+            idBoton == "0" || 
+            idBoton == "igual" || 
+            idBoton == "punto" ) {
+                boton.style.width  = "28%";
+                boton.style.height = "62px";      
+        } else if( idBoton == "mas" ) {
+            boton.style.width  = "88%";
+            boton.style.height = "98%"
         } else {
             boton.style.width  = "21%";
             boton.style.height = "62px";
         }
     },
-    maximizaTecla: function(boton){
-        var id = boton.id;
-        if( id=="1" || 
-            id=="2" || 
-            id=="3" || 
-            id=="0" || 
-            id=="igual" || 
-            id=="punto" ){
-			boton.style.width = "29%";
-			boton.style.height = "62.91px";
-		} else if( id == "mas" ){
+    maximizaTecla: function(boton) {
+        var idBoton = boton.id;
+        if( idBoton == "1" || 
+            idBoton == "2" || 
+            idBoton == "3" || 
+            idBoton == "0" || 
+            idBoton == "igual" || 
+            idBoton == "punto" ) {
+			    boton.style.width = "29%";
+			    boton.style.height = "62.91px";
+		} else if( idBoton == "mas" ) {
 			boton.style.width = "90%";
 			boton.style.height = "100%";
 		} else {
