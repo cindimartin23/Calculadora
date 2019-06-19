@@ -1,6 +1,7 @@
 var Calculadora = {
     visor: document.getElementById("display"),
     numeroEnVisor: "0",
+    operacion: "",
     
     init: function(){
         this.formatoTeclas();
@@ -91,6 +92,9 @@ var Calculadora = {
 		document.getElementById("9").addEventListener("click", function() {
             Calculadora.ingresarNumero("9");
         });
+        document.getElementById("on").addEventListener("click", function() {
+            Calculadora.limpiarVisor();
+        });
     },
     /* Funcion para leer el numero presionado */ 
     ingresarNumero: function(numero){
@@ -108,7 +112,13 @@ var Calculadora = {
     /* Funcion para refrescar los datos en la pantalla */ 
     actualizarVisor: function(){
 		this.visor.innerHTML = this.numeroEnVisor;
-	}
+    },
+    /* Funcion para limpiar la pantalla de la Calculadora */
+    limpiarVisor: function(){ 
+	    this.numeroEnVisor = "0";
+		this.operacion = "";
+		this.actualizarVisor();
+	},
 
 };
 
