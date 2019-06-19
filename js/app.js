@@ -95,6 +95,9 @@ var Calculadora = {
         document.getElementById("on").addEventListener("click", function() {
             Calculadora.limpiarVisor();
         });
+        document.getElementById("punto").addEventListener("click", function() {
+            Calculadora.agregaDecimal();
+        });
     },
     /* Funcion para leer el numero presionado */ 
     ingresarNumero: function(numero){
@@ -118,6 +121,17 @@ var Calculadora = {
 	    this.numeroEnVisor = "0";
 		this.operacion = "";
 		this.actualizarVisor();
+    },
+    /* Funcion para agregar punto decimal */
+    agregaDecimal: function(){
+        if (this.numeroEnVisor.length < 8 &&            this.numeroEnVisor.indexOf(".")== -1) {
+            if (this.numeroEnVisor == ""){
+                this.numeroEnVisor = this.numeroEnVisor + "0.";
+            } else {
+                this.numeroEnVisor = this.numeroEnVisor + ".";
+            }
+            this.actualizarVisor();
+        }
 	},
 
 };
