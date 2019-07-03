@@ -1,8 +1,13 @@
 var Calculadora = {
     visor: document.getElementById("display"),
     numeroEnVisor: "0",
+    n1: 0,
     operacion: "",
-    
+    n2: 0,
+    ultimoValor: 0,
+    teclaIgual: false,
+    resultado: 0,
+        
     init: function(){
         this.formatoTeclas();
         this.asignarEventos();
@@ -98,7 +103,27 @@ var Calculadora = {
         document.getElementById("punto").addEventListener("click", function() {
             Calculadora.agregaDecimal();
         });
-        document.getElementById("sign").addEventListener("click", function() {Calculadora.ponerSigno();});
+        document.getElementById("sign").addEventListener("click", function() {
+            Calculadora.ponerSigno();
+        });
+        document.getElementById("mas").addEventListener("click", function() {
+            Calculadora.ingresoN1yTipoOper("+");
+        });
+        document.getElementById("menos").addEventListener("click", function() {
+            Calculadora.ingresoN1yTipoOper("-");
+        });
+        document.getElementById("por").addEventListener("click", function() {
+            Calculadora.ingresoN1yTipoOper("*");
+        });
+        document.getElementById("dividido").addEventListener("click", function() {
+            Calculadora.ingresoN1yTipoOper("/");
+        });
+		document.getElementById("raiz").addEventListener("click", function() {
+            Calculadora.ingresoN1yTipoOper("raiz");
+        });     
+        document.getElementById("igual").addEventListener("click", function() {
+            Calculadora.mostrarResultado();
+        });
     },
     /* Funcion para leer el numero presionado */ 
     ingresarNumero: function(numero){
@@ -147,7 +172,55 @@ var Calculadora = {
 		this.numeroEnVisor = num;
 		this.actualizarVisor();
 		}
-	},
+    },
+    /* Funcion para capturar primer numero de la operacion y tipo de operacion */
+    ingresoN1yTipoOper: function(oper){
+		this.n1 = parseFloat(this.numeroEnVisor);
+		this.numeroEnVisor = "";
+		this.operacion = oper;
+		this.teclaIgual = false;
+		this.actualizarVisor();
+    },
+    /* Funcion para ingresar segundo numero de la operacion y realizar el cálculo */
+    mostrarResultado: function(){
+
+		if(!this.teclaIgual){ 
+			this.n2 = parseFloat(this.numeroEnVisor);
+			this.ultimoValor = this.n2;
+			this.calculo(this.n1, this.n2, this.operacion);
+        } 
+        else {
+			this.calculo(this.n1, this.ultimoValor, this.operacion);
+		}
+		this.n1 = this.resultado;
+		this.numeroEnVisor = "";
+		if (this.resultado.toString().length < 9){
+			this.numeroEnVisor = this.resultado.toString();
+		} else {
+			this.numeroEnVisor = this.resultado.toString().slice(0,8) + "...";
+		}
+		this.teclaIgual = true;		
+		this.actualizarVisor();
+    },
+    /* Funcion para realizar el calculo correspondiente */
+    calculo: function(n1, n2, operacion){
+		switch(operacion){
+			case "+": 
+				this.resultado = eval(n1 + n2);
+			break;
+			case "-": 
+				this.resultado = eval(n1 - n2);
+			break;
+			case "*": 
+				this.resultado = eval(n1 * n2);
+			break;
+			case "/": 
+				this.resultado = eval(n1 / n2);
+			break;
+			case "raiz":
+				this.resultado = eval(Math.sqrt(n1));
+		}
+	}
 };
 
 Calculadora.init();
